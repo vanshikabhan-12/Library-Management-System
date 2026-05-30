@@ -1,0 +1,87 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class LibraryManagementSystem {
+
+    static ArrayList<Book> books = new ArrayList<>();
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\n----- Library Management System -----");
+            System.out.println("1. Add Book");
+            System.out.println("2. View Books");
+            System.out.println("3. Search Book");
+            System.out.println("4. Exit");
+
+            System.out.print("Enter Choice: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    System.out.print("Book ID: ");
+                    int id = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.print("Title: ");
+                    String title = sc.nextLine();
+
+                    System.out.print("Author: ");
+                    String author = sc.nextLine();
+
+                    System.out.print("Quantity: ");
+                    int quantity = sc.nextInt();
+
+                    books.add(new Book(id, title, author, quantity));
+                    System.out.println("Book Added Successfully!");
+                    break;
+
+                case 2:
+                    System.out.println("\nAvailable Books:");
+                    for (Book b : books) {
+                        System.out.println(
+                            b.id + " | " +
+                            b.title + " | " +
+                            b.author + " | Qty: " +
+                            b.quantity
+                        );
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter Book ID: ");
+                    int searchId = sc.nextInt();
+
+                    boolean found = false;
+
+                    for (Book b : books) {
+                        if (b.id == searchId) {
+                            System.out.println("Book Found:");
+                            System.out.println(
+                                b.id + " | " +
+                                b.title + " | " +
+                                b.author + " | Qty: " +
+                                b.quantity
+                            );
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                        System.out.println("Book Not Found!");
+                    break;
+
+                case 4:
+                    System.out.println("Exiting...");
+                    System.exit(0);
+
+                default:
+                    System.out.println("Invalid Choice!");
+            }
+        }
+    }
+}
